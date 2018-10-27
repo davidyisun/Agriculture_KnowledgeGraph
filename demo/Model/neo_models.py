@@ -9,7 +9,13 @@ class Neo4j():
 		self.graph = Graph("http://localhost:7474", username="neo4j", password="huerge4040")
 
 	def matchItembyTitle(self,value):
-		answer = self.graph.find_one(label="Item",property_key="title",property_value=value)
+		try:
+			answer = self.graph.find_one(label="Item",property_key="title",property_value=value)
+		except Exception as e:
+			print(self.graph)
+			print(value)
+			print(e)
+			raise
 		return answer
 
 	# 根据title值返回互动百科item
